@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fb login box</title>
+</head>
+<body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '748295185930009',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v7.0'
+        });
+      };
+
+      function signin() {
+        FB.login(function(response) {
+          console.log(response);
+          if (response.authResponse) {
+            FB.api('/me', function(response) {
+              console.log('Good to see you, ' + response.name + '.');
+            });
+          } else {
+            console.log('User cancelled login or did not fully authorize.');
+          }
+        }, {scope: 'email,public_profile,ads_management'});
+      }
+    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <button type="button" onclick="signin()">Sign in</button>
+</body>
+</html>
